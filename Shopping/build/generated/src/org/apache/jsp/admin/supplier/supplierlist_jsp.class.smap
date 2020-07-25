@@ -1,0 +1,12 @@
+SMAP
+supplierlist_jsp.java
+JSP
+*S JSP
+*F
++ 0 supplierlist.jsp
+admin/supplier/supplierlist.jsp
+*L
+5,479:52
+484,12:532
+495,55:544
+*E
