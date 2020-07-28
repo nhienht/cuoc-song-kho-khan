@@ -36,6 +36,16 @@
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+
+       
         <title>Other</title>
         <style>
             html {
@@ -496,7 +506,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                                <table id="example" class="table table-bordered dataTable" id="dataTable" width="100%"
                                                        cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                                        style="width: 100%;">
                                                     <thead>
@@ -546,7 +556,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                                <table id="brand" class="table table-bordered dataTable" id="dataTable" width="100%"
                                                        cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                                        style="width: 100%;">
                                                     <thead>

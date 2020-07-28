@@ -25,6 +25,22 @@
         crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>List Customer</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+
+        <script>
+            $(document).ready(function () {
+
+                $('#example').dataTable({}); // dòng này ?? nhúng b?ng bi?u thành d?ng b?ng ???c phân trang
+
+            });
+        </script>
         <style>
             html {
                 position: relative;
@@ -430,7 +446,7 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>Supplier</span></a>
                     </li>
-                     <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="../other/list.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>Other</span></a>
@@ -462,11 +478,11 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                       
+
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                            <table  id="example" class="table table-bordered dataTable" id="dataTable" width="100%"
                                                    cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                                    style="width: 100%;">
                                                 <thead>
@@ -513,30 +529,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="dataTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                    class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                           class="page-link">Next</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                                </div>
                         </div>
                     </div>
                 </div>
@@ -551,8 +544,8 @@
         </a>
         <%
             cDao.closeConn();
-            
-            %>
+
+        %>
     </body>
 
 

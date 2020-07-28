@@ -34,6 +34,22 @@
         crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+   
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+ 
+  <script>
+    $(document).ready(function() {
+     
+    $('#example').dataTable({}); // dòng này để nhúng bảng biểu thành dạng bảng được phân trang
+         
+    } ); 
+  </script>   
         <title>List Products </title>
         <style>
             html {
@@ -497,14 +513,7 @@
                                 <div class="table-responsive table-hover">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                         
-                                        <div class="row mb-5">                                     
-                                            <div class="col-sm-4 col-md-4">
-                                                <form class="d-flex justify-content-center h-100 search-form" action="">
-                                                    <input class="searchbar  w-100" type="text" name="word" placeholder="search">
-                                                    <!--<input type="submit" name="find" class="btn btn-outline-primary "  value="">-->
-                                                    <button type="submit"  id="icon" class="btn btn-secondary " name="find"><i class="fa fa-search"></i></button>
-                                                </form>
-                                            </div>
+                                      
                                         
 
 
@@ -615,7 +624,7 @@
                                                </div>
                                             </div>
                                                
-                                            <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                            <table id="example"  class="table table-bordered dataTable" id="dataTable" width="100%"
                                                    cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                                    style="width: 100%;">
                                                 <thead>
@@ -799,30 +808,6 @@
                                                 </tbody>
 
                                             </table>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="dataTable_info" role="status"
-                                                 aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                               data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                    class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                        <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                           class="page-link">Next</a></li>
-                                                </ul>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

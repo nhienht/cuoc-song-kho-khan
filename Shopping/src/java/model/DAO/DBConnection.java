@@ -25,7 +25,7 @@ public class DBConnection {
     public DBConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");//Declare Driver
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://node230623-clothes.j.layershift.co.uk/prj321", "root", "RMFgse89311");//Declare url database
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/prj321", "root", "");//Declare url database
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

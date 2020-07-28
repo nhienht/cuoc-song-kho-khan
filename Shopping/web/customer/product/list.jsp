@@ -164,7 +164,12 @@
                         <p style="font-size: 20px; font-weight: bold"> Thank you!</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary  btn-sm" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary  btn-sm" data-dismiss="modal" onclick="reload()">Close</button>
+                        <script>
+                            function reload() {
+                                location.href = "list.jsp"
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
@@ -235,8 +240,8 @@
         </nav>
 
         <sql:setDataSource var="conn" scope="session"
-                           url="jdbc:mysql://node230623-clothes.j.layershift.co.uk/prj321"
-                           user="root" password="RMFgse89311"
+                           url="jdbc:mysql://localhost/prj321"
+                           user="root" password=""
                            driver="com.mysql.jdbc.Driver"/>
         <%if (request.getParameter("type") != null && request.getParameter("value") != null) {
                 String sql = " select * from products where status= ?";
@@ -282,10 +287,10 @@
 
             </div>
             <div class="col dropright col-sm-4 col-md-4 ">
-                <button class="btn  dropdown-toggle btn-light btn-lg" type="button" data-toggle="dropdown">Filter by
-
+                <button class="btn btn-light btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter by
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li class="dropdown-submenu">
                         <a class="test" tabindex="-1" href="#">Type<span class="caret"></span></a>
                         <ul class="dropdown-menu">

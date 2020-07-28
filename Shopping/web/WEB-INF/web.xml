@@ -6,21 +6,21 @@ and open the template in the editor.
 -->
 
 
-<root>
+<web-app>
+
     <error-page>
   <error-code>401</error-code>
-  <location>/Error.jsp</location>
+  <location>/error/Error.jsp</location>
 </error-page>
 <error-page>
   <error-code>403</error-code>
-  <location>/Error.jsp</location>
+  <location>/error/Error.jsp</location>
 </error-page>
 <error-page>
   <error-code>404</error-code>
-  <location>/Error.jsp</location>
+  <location>/error/Error.jsp</location>
 </error-page>
 <error-page>
   <error-code>500</error-code>
-  <location>/Error.jsp</location>
-</error-page>
-</root>
+  <location>/error/Error.jsp</location>
+</error-page></web-app>
