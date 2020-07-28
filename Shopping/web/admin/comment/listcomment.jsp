@@ -33,7 +33,7 @@
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>List Customer</title>
+        <title>List Comment</title>
         <style>
             html {
                 position: relative;
@@ -412,7 +412,7 @@
                             <span>Bill</span></a>
                     </li>
 
-                    <li class="nav-item active"  >
+                    <li class="nav-item "  >
                         <a class="nav-link" href="../customer/listcustomer.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Customer</span></a>
@@ -434,6 +434,16 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../supplier/supplierlist.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Supplier</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
 
@@ -448,7 +458,7 @@
                             <li class="breadcrumb-item">
                                 <a href="../product/listproducts.jsp">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active">Customers</li>
+                            <li class="breadcrumb-item active">Comment</li>
 
 
                         </ol>
@@ -461,7 +471,7 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                       
+
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -488,7 +498,7 @@
                                                         while (rs.next()) { // cho vong lap ?e show ra cac ket qua 
                                                             out.print("<tr>");
                                                             out.print("<td>" + rs.getInt(1) + "</td>");
-                                                            Customer c = cDao.getCustomer(rs.getInt(2));
+                                                            Customer c = cDao.getCustomer(rs.getInt(3));
                                                             out.print("<td>" + c.getcName() + "</td>");
                                                             Products p = pDao.getProduct(rs.getInt(2));
                                                             out.print("<td>" + p.getpName() + "</td>");
@@ -543,16 +553,11 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-
-
-
-
-
-
-
-
-
-
+        <%
+            cDao.closeConn();
+            cmt.closeConn();
+            pDao.closeConn();
+        %>
     </body>
 
 

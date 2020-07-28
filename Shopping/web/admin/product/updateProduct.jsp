@@ -6,7 +6,7 @@
 <%@page import="model.DAO.TypeDAO"%>
 <%@page import="java.util.Date"%>
 <%@page import="model.entity.Products"%>
-<%@page import="model.DAO.ImageDAO"%>
+<%--<%@page import="model.DAO.ImageDAO"%>--%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="model.DAO.ProductsDAO"%>
 <!DOCTYPE html>
@@ -372,9 +372,10 @@
             Double sellingPrice = 0.0, price = 0.0;
             float discount = 0;
             Date pDate = null;
+             ProductsDAO pDao = new ProductsDAO();
             if (request.getParameter("id") != null) {
                 id = Integer.parseInt(request.getParameter("id"));
-                ProductsDAO pDao = new ProductsDAO();
+               
                 Products p = pDao.getProduct(id);
                 status = p.getSpID();
                 brID = p.getBrID();
@@ -472,6 +473,11 @@
                         <a class="nav-link" href="../supplier/supplierlist.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>Supplier</span></a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
                     </li>
 
 
@@ -715,7 +721,14 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-    </body>
+        <%
+            brDao.closeConn();
+            tDao.closeConn();
+            supDao.closeConn();
+            pDao.closeConn();
+            
+            %>
+</body>
 
 
 </html>

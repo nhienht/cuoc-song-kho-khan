@@ -440,6 +440,11 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>Supplier</span></a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
 
@@ -503,6 +508,7 @@
                                                                out.print("<td>" + rs.getString(5) + "</td>");
                                                                 out.print("</tr>");
                                                         }
+                                                       
                                                     %>
                                                 </tbody>
                                             </table>
@@ -544,17 +550,10 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-
-
-
-
-
-
-
-
-
-
+        <%
+            supDao.closeConn();
+            
+            %>
     </body>
-
-
+    
 </html>

@@ -472,6 +472,7 @@
             CustomerDAO cDao = new CustomerDAO();
             Customer c = cDao.getCustomer(id);
 
+
         %>
 
         <%--Show cac infor cua nguoi dung ra va cho nguoi dung chinh sua thong tin neu muon --%>
@@ -518,6 +519,8 @@
             </div>
         </div>
 
-
+        <%
+            cDao.closeConn();
+        %>
     </body>
 </html>

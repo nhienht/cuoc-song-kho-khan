@@ -364,14 +364,7 @@
                 }
             </style>
         </head>
-
-
-
-
-
         <body id="page-top" class="">
-
-
             <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
                 <a class="navbar-brand mr-1 fas" href="../../dashboard.jsp">
                     <h3>Clothing</h3>
@@ -448,6 +441,11 @@
                             <span>Supplier</span></a>
                     </li>
 
+                     <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
                 </ul>
@@ -508,14 +506,13 @@
                                                             ResultSet rs = bdDao.getBillDetail(Integer.parseInt(request.getParameter("id")));
                                                             BillDAO bDao = new BillDAO();
                                                             Bill b = bDao.getBill(Integer.parseInt(request.getParameter("id")));
-
                                                             ProductsDAO pDao = new ProductsDAO();
-
+                                                             ImageDAO iDao = new ImageDAO();
                                                             double total = 0;
                                                             int i = 1;
                                                             while (rs.next()) {
                                                                 Products p = pDao.getProduct(rs.getInt(2));
-                                                                ImageDAO iDao = new ImageDAO();
+                                                               
                                                                 ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
 
                                                                 out.print("<tr>");
@@ -572,17 +569,13 @@
             <!-- /#wrapper -->
 
             <!-- Scroll to Top Button-->
-
-
-
-
-
-
-
-
-
-
-
+            <%
+                bDao.closeConn();
+                bdDao.closeConn();
+                pDao.closeConn();
+                iDao.closeConn();
+                
+                %>
         </body>
 
 

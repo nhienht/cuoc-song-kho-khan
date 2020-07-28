@@ -423,4 +423,47 @@ public class ProductsDAO {
         HashMap<Integer, Integer> newList = sort.sortHashMapByValues(products);
         return newList;
     }
+    public void closeConn(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public ResultSet getProductByGendee(String gender) {
+        try {
+            String sql = "select * from products where gender=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, gender);
+            ResultSet rs = pst.executeQuery();
+           return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    } 
+     
+    public ResultSet getProductwithST(String type, int id) {
+        try {
+            String sql = null;
+            if (type.equals("type")) {
+                sql = "select * from products where tID=?";
+            } else if (type.equals("supplier")) {
+                sql = "select * from products where supID=?";
+            } else if (type.equals("brand")) {
+                sql = "select * from products where brID=?";
+            } else if (type.equals("size")) {
+                sql = "select * from products where size=?";
+            } else if (type.equals("status")) {
+                sql = "select * from products where status=?";          
+            }
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

@@ -360,9 +360,9 @@
 
 
         <%
+            ProductsDAO pDao = new ProductsDAO();
             if (request.getParameter("id") != null) { // neu da co id
                 int pId = Integer.parseInt(request.getParameter("id")); // ep kieu id va get gia tri id
-                ProductsDAO pDao = new ProductsDAO();
                 int kq = pDao.delete(pId); // goi de delete
                 if (kq > 0) {
                     out.println("<script> alert('Xoa thanh cong');</script>"); // xoa thanh cong
@@ -446,6 +446,16 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Comment</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../supplier/supplierlist.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Supplier</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../other/list.jsp">
+                            <i class="fas fa-fw fa-book"></i>
+                            <span>Other</span></a>
+                    </li>
 
 
 
@@ -472,7 +482,7 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-          
+
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <table class="table table-bordered dataTable" id="dataTable" width="100%"
@@ -520,6 +530,7 @@
 
                                                                 out.print("</tr>");
                                                             }
+
                                                         %>
                                                     </tbody>
 
@@ -562,16 +573,9 @@
             <a class="scroll-to-top rounded" href="#page-top">
                 <i class="fas fa-angle-up"></i>
             </a>
-
-
-
-
-
-
-
-
-
-
+            <%                bDao.closeConn();
+                pDao.closeConn();
+            %>
         </body>
 
 

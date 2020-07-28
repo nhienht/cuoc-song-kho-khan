@@ -20,6 +20,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+       
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
@@ -34,6 +35,28 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">-->
+
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#centralModalSm").modal('show');
+            });
+        </script>
 
         <title>Clothing </title>
         <style>
@@ -114,6 +137,45 @@
         }
     %>
     <body>
+        <%
+            String msg = request.getParameter("message");
+            if (msg != null) {%>
+        <!-- Frame Modal Bottom -->
+        <!-- Button trigger modal -->
+
+        <!-- Central Modal Small -->
+        <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+
+            <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-xl" role="document">
+
+
+                <div class="modal-content modal-dialog-centered">
+                    <div class="modal-header">
+                        <h4 class="modal-title w-100" id="myModalLabel"><p style="font-size: 30px; color:palevioletred ; font-weight: bold">Notification</p></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="font-size: 20px; font-weight: bold">The product has been added to cart.</p>
+                        <p style="font-size: 20px; font-weight: bold">Click on Cart to see details.</p>
+                        <p style="font-size: 20px; font-weight: bold"> Thank you!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary  btn-sm" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Central Modal Small -->
+
+
+        <%}
+
+        %>
+
 
         <jsp:include page="../../header/header.jsp" ></jsp:include>
             <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -150,8 +212,7 @@
                             <div class="dropdown-menu dropdown-menu- bg-dark text-white "  >
                                 <!--<a class="dropdown-item" href="#">Logout</a>-->
 
-                            <%
-                                if (cookies.length > 1) {
+                            <%                                if (cookies.length > 1) {
                                     for (Cookie cookie : cookies) {
                                         if (cookie.getName().equals("user")) {
                                             out.print("<a class='nav-link dropdown-item bg-dark' style='color: white; font-size:20px;' href='../../customer/Information.jsp'>" + cookie.getValue() + "</a>");
@@ -174,8 +235,8 @@
         </nav>
 
         <sql:setDataSource var="conn" scope="session"
-                           url="jdbc:mysql://localhost/prj321"
-                           user="root" password=""
+                           url="jdbc:mysql://node230623-clothes.j.layershift.co.uk/prj321"
+                           user="root" password="RMFgse89311"
                            driver="com.mysql.jdbc.Driver"/>
         <%if (request.getParameter("type") != null && request.getParameter("value") != null) {
                 String sql = " select * from products where status= ?";
@@ -215,12 +276,12 @@
             <sql:param value="${row.pID}"/>	
         </sql:query>
         <div class=" row container">
-            <div class="col col-sm-6 col-md-2">
-                <button class="btn btn-light btn-lg" type="button"><a href="list.jsp">All Products</a></button>
+            <div class="col col-sm-4 col-md-4 ml-5 " >
+                <button class="btn btn-light btn-lg" type="button"><a href="list.jsp" style="color: #000000">All Products</a></button>
 
 
             </div>
-            <div class="col dropright col-sm-6 col-md-3 ">
+            <div class="col dropright col-sm-4 col-md-4 ">
                 <button class="btn  dropdown-toggle btn-light btn-lg" type="button" data-toggle="dropdown">Filter by
 
                 </button>
@@ -301,8 +362,8 @@
                 </ul>
             </div>
         </div>
-                            
-                            
+
+
 
 
         <div class="container-fluid mt-0">
@@ -335,8 +396,12 @@
 
 
                         <div class="overlay">
-                            <a href="./../../CartController?id=${row.pID}&quantity=1" class="btn btn-info btn-lg">
-
+                            <!--<a href="./../../CartController?id=${row.pID}&quantity=1" class="btn btn-info btn-lg">-->
+                            <%
+                                String url = request.getRequestURI();
+                                // System.out.println(url);
+                            %>
+                            <a href="./../../CartController?id=${row.pID}&quantity=1&url=<%= url%>" class="btn btn-info btn-lg">
                                 <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
                             </a>
                         </div>
@@ -358,4 +423,9 @@
             });
         });
     </script>
+    <%
+        tDao.closeConn();
+        supDao.closeConn();
+        brDao.closeConn();
+    %>
 </html>
