@@ -1,29 +1,28 @@
 <%-- 
-    Document   : listcomment
-    Created on : Jul 23, 2020, 4:25:58 PM
-    Author     : NhienHT
+    Document   : listproducts
+    Created on : Jul 5, 2020, 9:50:45 AM
+    Author     : 
 --%>
 
-<%@page import="model.DAO.SupplierDAO"%>
-<%@page import="model.entity.Customer"%>
 <%@page import="model.entity.Products"%>
-<%@page import="model.DAO.CommentDAO"%>
-<%@page import="model.DAO.CustomerDAO"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="model.DAO.SupplierDAO"%>
+<%@page import="model.DAO.BrandDao"%>
+<%@page import="model.DAO.TypeDAO"%>
 <%@page import="model.DAO.ImageDAO"%>
+<%@page import="model.DAO.ProductsDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="model.DAO.ProductsDAO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-        <meta charset="UTF-8">
-        <!-- CSS only -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-        <!-- JS, Popper.js, and jQuery -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -33,7 +32,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -46,11 +46,23 @@
         <script>
             $(document).ready(function () {
 
-                $('#example').dataTable({}); // d�ng n�y ?? nh�ng b?ng bi?u th�nh d?ng b?ng ???c ph�n trang
+                $('#example').dataTable({
+                    "aoColumnDefs": [
+                        {'bSortable': false, 'aTargets': [3, 4, 5, 10, 14]}
+                    ]
+                }); // dòng này để nhúng bảng biểu thành dạng bảng được phân trang
 
             });
         </script>
-        <title>List Customer</title>
+        <script>
+            function myFunction(id) {
+                var person = confirm("Are you sure to Change Status ?");
+                if (person) {
+                    location.href = "../../Change?pID=" + id;
+                }
+            }
+        </script>
+        <title>List Products </title>
         <style>
             html {
                 position: relative;
@@ -72,6 +84,7 @@
                 width: 100%;
                 padding-top: 1rem;
                 padding-bottom: 80px;
+
             }
 
             body.fixed-nav #content-wrapper {
@@ -298,6 +311,49 @@
                     display: none;
                 }
             }
+            .searchbar{
+                margin-bottom: auto;
+                margin-top: auto;
+                height: 60px;
+                background-color: #F5A9BC;
+                border-radius: 30px;
+                padding: 10px;
+            }
+
+            .search_input{
+                color: white;
+                border: 0;
+                outline: 0;
+                background: none;
+                width: 0;
+                caret-color:transparent;
+                line-height: 40px;
+                transition: width 0.4s linear;
+            }
+
+            .searchbar:hover > .search_input{
+                padding: 0 10px;
+                width: 450px;
+                caret-color:red;
+                transition: width 0.4s linear;
+            }
+
+            .searchbar:hover > .search_icon{
+                background: white;
+                color: #e74c3c;
+            }
+
+            .search_icon{
+                height: 40px;
+                width: 40px;
+                float: right;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                color:white;
+                text-decoration:none;
+            }
 
             .sidebar.fixed-top {
                 top: 56px;
@@ -315,7 +371,26 @@
                 -webkit-transform: rotate(15deg);
                 transform: rotate(15deg);
             }
+            .btn{
+                background: #F5A9BC;
+                opacity: 0.7;
+                color: #000
+            }
+            #icon{
+                border-radius: 40px;
+                width: 70px;
+                margin-left: 10px 
+            }
+            #bestsale{
+                font-weight: bold;
+                width: 150px;
 
+            }
+            #listAll{
+                color: #000;
+                background: #F5A9BC;
+                margin-left: 30px 
+            }
             @media (min-width: 576px) {
                 .card-columns {
                     -webkit-column-count: 1;
@@ -331,56 +406,12 @@
                 .bg-dark {
                     background-color: #343a40!important;
                 }
-                .searchbar{
-                    margin-bottom: auto;
-                    margin-top: auto;
-                    height: 60px;
-                    background-color: #F5A9BC;
-                    border-radius: 30px;
-                    padding: 10px;
-                }
-
-                .search_input{
-                    color: white;
-                    border: 0;
-                    outline: 0;
-                    background: none;
-                    width: 0;
-                    caret-color:transparent;
-                    line-height: 40px;
-                    transition: width 0.4s linear;
-                }
-
-                .searchbar:hover > .search_input{
-                    padding: 0 10px;
-                    width: 450px;
-                    caret-color:red;
-                    transition: width 0.4s linear;
-                }
-
-                .searchbar:hover > .search_icon{
-                    background: white;
-                    color: #e74c3c;
-                }
-
-                .search_icon{
-                    height: 40px;
-                    width: 40px;
-                    float: right;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 50%;
-                    color:white;
-                    text-decoration:none;
+                .zoom:hover{
+                    transform: scale(1.5);
                 }
             </style>
         </head>
-
-
-
         <body id="page-top" class="">
-
             <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
                 <a class="navbar-brand mr-1 fas" href="../../home.jsp">
                     <h3>Clothing</h3>
@@ -429,12 +460,12 @@
                             <span>Bill</span></a>
                     </li>
 
-                    <li class="nav-item "  >
+                    <li class="nav-item">
                         <a class="nav-link" href="../customer/listcustomer.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>List Customer</span></a>
                     </li>
-                    <li class="nav-item dropdown ">
+                    <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="../product/listproducts.jsp" id="pagesDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-fw fa-box-open"></i>
@@ -443,7 +474,6 @@
                         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                             <a class="dropdown-item" href="../product/listproducts.jsp">List Products</a>
                             <a class="dropdown-item" href="../product/insertProduct.jsp">Insert Products</a>
-
                         </div>
                     </li>
                     <li class="nav-item">
@@ -456,14 +486,11 @@
                             <i class="fas fa-fw fa-book"></i>
                             <span>Supplier</span></a>
                     </li>
-                     <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="../other/list.jsp">
                             <i class="fas fa-fw fa-book"></i>
                             <span>Other</span></a>
                     </li>
-
-
-
                 </ul>
 
                 <div id="content-wrapper">
@@ -473,82 +500,173 @@
                         <!-- Breadcrumbs-->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="../product/listproducts.jsp">Dashboard</a>
+                                <a href="../../dashboard.jsp">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active">Customers</li>
-
+                            <li class="breadcrumb-item active">Products</li>
 
                         </ol>
 
                         <!-- DataTables Example -->
-                        <div class="card mb-3">
-                            <div class="card-header row">
-                                <div class="col"> <i class=" fas fa-user"></i>
-                                List Supplier</div>
-                               
-                                <div class="col">
-                                <a href="insertsupplier.jsp">Add new supplier</a>
+                        <div class="card ">
+                            <div class="card-header mb-3 row">
+                                <div class="col col-md-3 col-sm-3">
+                                    <i class="fas fa-user"> List Products</i>
+
+                                </div>
+
+                                <div class='col col-md-3 col-sm-3'>
+                                    <button  id="bestsale" class="btn btn-primary"><a style="color: #000" href='listproducts.jsp'>
+                                            List All</a>
+                                    </button>
+                                </div>
+
                             </div>
-                            </div>
-                           
+
                             <div class="card-body">
-                                <div class="table-responsive">
+
+                                <div class="table-responsive table-hover">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                       
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table id="example" class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                   cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                   style="width: 100%;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID Supplier</th>
-                                                        <th>Supplier Name</th>
-                                                        <th>Phone number</th>
-                                                        <th>Address</th>
-                                                        <th>Emaail</th>
-                                                      
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <%
-                                                      SupplierDAO supDao = new SupplierDAO();
-                                                        ResultSet rs = supDao.getAll();
-                                                        while (rs.next()) { // cho vong lap ?e show ra cac ket qua 
-                                                            out.print("<tr>");
-                                                            out.print("<td>" + rs.getInt(1) + "</td>");
-                                                            out.print("<td>" + rs.getString(2) + "</td>");
-                                                             out.print("<td>" + rs.getString(3) + "</td>");
-                                                              out.print("<td>" + rs.getString(4) + "</td>");
-                                                               out.print("<td>" + rs.getString(5) + "</td>");
-                                                                out.print("</tr>");
-                                                        }
-                                                       
-                                                    %>
-                                                </tbody>
-                                            </table>
+
+
+
+
+
+
+                                        <div class='col col-md-5 col-sm-5 ml-5' >
+
+                                            <%
+                                                //                                                ProductsDAO pDao = new ProductsDAO();
+                                                ResultSet rs = null;
+                                                ProductsDAO pDao = new ProductsDAO();
+                                                rs = pDao.getDelete();
+
+
+                                            %>
                                         </div>
                                     </div>
-                                   
+
+                                    <table id="example"  class="table table-bordered dataTable" id="dataTable" width="100%"
+                                           cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                           style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 20px">ID</th>
+                                                <th style="width: 40px">Product's name</th>
+                                                <th>Image</th>
+                                                <th>Brand Products</th>
+                                                <th>Type Products</th>
+                                                <th>Supplier </th>
+                                                <th>Saleprice</th>
+                                                <th>Price</th>
+                                                <th>Describle</th>
+                                                <th>Date</th>
+                                                <th>Size </th>
+                                                <th>Material</th>
+                                                <th>Quantity</th>
+                                                <th>Discount</th>
+                                                <th>Gender</th>                                                         
+                                                <th>Status Product</th>
+                                                <th></th>
+
+                                            </tr>
+
+
+                                        </thead>
+
+                                        <tbody>
+
+                                            <%                                                //  ResultSet rs = null;
+                                                BrandDao brDao = new BrandDao();
+                                                TypeDAO tDao = new TypeDAO();
+                                                SupplierDAO supDao = new SupplierDAO();
+                                                while (rs.next()) {
+
+                                                    out.print("<tr>");
+                                                    out.print("<td>" + rs.getInt("pID") + "</td>");
+                                                    out.print("<td>" + rs.getString("pName") + "</td>");
+                                                    ImageDAO iDao = new ImageDAO();
+                                                    ResultSet rsImg = iDao.getImage(rs.getInt("pID"));
+                                                    out.print("<td>");
+                                                    while (rsImg.next()) {
+                                                        out.print("<a href='../../" + rsImg.getString("imageName") + "'> <img class='zoom' src='../../" + rsImg.getString("imageName") + "' height='100px' width='100px' /></a>");
+                                                    }
+                                                    out.print("</td>");
+                                                    iDao.closeConn();
+                                                    //   BrandDao brDao = new BrandDao();
+                                                    String brand = brDao.getBrand(rs.getInt("brID"));
+                                                    out.print("<td>" + brand + "</td>");
+
+                                                    //  TypeDAO tDao = new TypeDAO();
+                                                    String type = tDao.getType(rs.getInt("tID"));
+                                                    out.print("<td>" + type + "</td>");
+
+                                                    //  SupplierDAO supDao = new SupplierDAO();
+                                                    String sup = supDao.getSupplier(rs.getInt("supID"));
+                                                    out.print("<td>" + sup + "</td>");
+
+                                                    out.print("<td>" + rs.getInt("sellingPrice") + "</td>");
+                                                    out.print("<td>" + rs.getInt("price") + "</td>");
+                                                    out.print("<td>" + rs.getString("describle") + "</td>");
+                                                    out.print("<td>" + rs.getDate("pDate") + "</td>");
+                                                    int size = rs.getInt("size");
+                                                    String s = "";
+                                                    if (size == 0) {
+                                                        s = "S";
+                                                    } else if (size == 1) {
+                                                        s = "M";
+                                                    } else if (size == 2) {
+                                                        s = "L";
+                                                    } else if (size == 3) {
+                                                        s = "XL";
+                                                    } else {
+                                                        s = "XXL";
+                                                    }
+                                                    out.print("<td>" + s + "</td>");
+                                                    out.print("<td>" + rs.getString("material") + "</td>");
+                                                    out.print("<td>" + rs.getString("quantity") + "</td>");
+                                                    out.print("<td>" + rs.getString("discount") + "</td>");
+                                                    out.print("<td>" + rs.getString("gender") + "</td>");
+
+                                                    if (rs.getInt("status") == 1) {
+                                                        out.println("<td style='color:green; font-weight: bold;' >Valid</td> ");
+                                                    } else {
+                                                        out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
+                                                    }
+                                                    out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'><i class='fa fa-edit w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></a>");
+//                                                    out.print("<a href='../../Change?pID=" + rs.getInt("pID") + "' + '><i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></a></td>");
+                                                    out.print("<button class='btn btn-primary-outline'  onclick='myFunction(" + rs.getInt("pID") + ")'> <i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button></td>");
+
+                                                    out.print("</tr>");
+                                                }
+                                            %>
+                                        </tbody>
+
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- /#wrapper -->
+    </div>
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-        <%
-            supDao.closeConn();
-            
-            %>
-    </body>
-    
+</div>
+<!-- /#wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<%
+    pDao.closeConn();
+    tDao.closeConn();
+    brDao.closeConn();
+
+    supDao.closeConn();
+%>
+</body>
+
+
 </html>
+

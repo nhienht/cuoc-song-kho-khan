@@ -20,7 +20,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-       
+
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
@@ -366,7 +366,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div>z
 
 
 
@@ -405,7 +405,7 @@
                             <%
                                 String url = request.getRequestURI();
                                 // System.out.println(url);
-                            %>
+%>
                             <a href="./../../CartController?id=${row.pID}&quantity=1&url=<%= url%>" class="btn btn-info btn-lg">
                                 <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
                             </a>

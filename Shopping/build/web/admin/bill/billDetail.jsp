@@ -37,6 +37,7 @@
                 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
         <title>List Bill </title>
+        
         <style>
             html {
                 position: relative;
@@ -536,28 +537,7 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_info" id="dataTable_info" role="status"
-                                                     aria-live="polite">Showing 1 to 1 of 1 entries</div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-7">
-                                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled"
-                                                            id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                                   data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item active"><a href="#"
-                                                                                                        aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-                                                                                                        class="page-link">1</a></li>
-                                                        <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-                                                               class="page-link">Next</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

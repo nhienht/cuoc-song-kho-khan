@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
 
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
@@ -40,6 +40,14 @@
                 $('#example').dataTable({}); // dòng này ?? nhúng b?ng bi?u thành d?ng b?ng ???c phân trang
 
             });
+        </script>
+        <script>
+            function myFunction(id) {
+                var person = confirm("Are you sure to Change Status ?");
+                if (person) {
+                    location.href = "../../Change?cID=" + id;
+                }
+            }
         </script>
         <style>
             html {
@@ -483,8 +491,8 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <table  id="example" class="table table-bordered dataTable" id="dataTable" width="100%"
-                                                   cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                                   style="width: 100%;">
+                                                    cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                    style="width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>ID Customer</th>
@@ -519,9 +527,8 @@
                                                                 out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
                                                             }
                                                             out.print("<td>" + rs.getString(10) + "</td>");
-                                                            //                            out.print("<td><a href='billDetail.jsp?id=" + rs.getInt("bID") + "'>Xem chi tiet hoa don</a></td>");
-                                                            //   out.print("<td><a href='updateCustomer.jsp?id=" + rs.getInt("cID") + "'>Update</a></td>");
-                                                            out.print("<td><a href='../../Change?cID=" + rs.getInt(1) + "' + '>Change</a></td>"); // dua id cua customer de thuc hien viec change stt customer do
+//                                                          out.print("<a href='../../Change?pID=" + rs.getInt("pID") + "' + '><i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></a></td>");
+                                                            out.print("<td><button class='btn btn-primary-outline' onclick='myFunction(" + rs.getInt("cID") + ")'> <i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button></td>");
                                                             out.print("</tr>");
                                                         }
                                                     %>
@@ -529,24 +536,24 @@
                                             </table>
                                         </div>
                                     </div>
-                                                                </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
+            <!-- /#wrapper -->
 
-        </div>
-        <!-- /#wrapper -->
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+            <%
+                cDao.closeConn();
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-        <%
-            cDao.closeConn();
-
-        %>
-    </body>
+            %>
+        </body>
 
 
-</html>
+    </html>
