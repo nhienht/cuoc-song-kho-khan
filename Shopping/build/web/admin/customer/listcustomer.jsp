@@ -33,7 +33,7 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script>
             $(document).ready(function () {
 
@@ -43,7 +43,7 @@
         </script>
         <script>
             function myFunction(id) {
-                var person = confirm("Are you sure to Change Status ?");
+                var person = confirm("Are you sure to Delete ?");
                 if (person) {
                     location.href = "../../Change?cID=" + id;
                 }
@@ -58,7 +58,10 @@
             body {
                 height: 100%;
             }
-
+            .btn{
+                background: #F5A9BC;
+                font-weight: bold
+            }
             #wrapper {
                 display: -webkit-box;
                 display: -ms-flexbox;
@@ -480,10 +483,22 @@
 
                         <!-- DataTables Example -->
                         <div class="card mb-3">
-                            <div class="card-header">
-                                <i class="fas fa-user"></i>
-                                List Customers</div>
+                             <div class="card-header mb-3 row">
+                                <div class="col col-md-3 col-sm-3">
+                                    <i class="fas fa-user"> List Customer</i>
+
+                                </div>
+                                
+                                
+                                <div class='col col-md-3 col-sm-3'>
+                                    <button  id="bestsale" class="btn btn-outline-secondary"><a style="color: #000" href='customerDel.jsp'>
+                                            List Deleted</a>
+                                    </button>
+                                </div>
+                            </div>
+                            
                             <div class="card-body">
+                               
                                 <div class="table-responsive">
                                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
@@ -528,7 +543,7 @@
                                                             }
                                                             out.print("<td>" + rs.getString(10) + "</td>");
 //                                                          out.print("<a href='../../Change?pID=" + rs.getInt("pID") + "' + '><i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></a></td>");
-                                                            out.print("<td><button class='btn btn-primary-outline' onclick='myFunction(" + rs.getInt("cID") + ")'> <i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button></td>");
+                                                            out.print("<td><button class='btn btn-link bg-transparent' onclick='myFunction(" + rs.getInt("cID") + ")'> <i class='fa fa-trash-o w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button></td>");
                                                             out.print("</tr>");
                                                         }
                                                     %>

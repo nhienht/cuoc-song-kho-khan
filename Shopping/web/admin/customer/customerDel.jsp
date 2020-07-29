@@ -33,7 +33,7 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
         <script>
             $(document).ready(function () {
 
@@ -43,7 +43,7 @@
         </script>
         <script>
             function myFunction(id) {
-                var person = confirm("Are you sure to Delete ?");
+                var person = confirm("Are you sure to Recycle ?");
                 if (person) {
                     location.href = "../../Change?cID=" + id;
                 }
@@ -58,10 +58,7 @@
             body {
                 height: 100%;
             }
-            .btn{
-                background: #F5A9BC;
-                font-weight: bold
-            }
+
             #wrapper {
                 display: -webkit-box;
                 display: -ms-flexbox;
@@ -305,6 +302,10 @@
                 height: calc(100vh - 56px);
                 overflow-y: auto;
             }
+            .btn{
+                background: #F5A9BC;
+                font-weight: bold;
+            }
 
             .card-body-icon {
                 position: absolute;
@@ -491,8 +492,8 @@
                                 
                                 
                                 <div class='col col-md-3 col-sm-3'>
-                                    <button  id="bestsale" class="btn btn-outline-secondary"><a style="color: #000" href='customerDel.jsp'>
-                                            List Deleted</a>
+                                    <button  id="bestsale" class="btn btn-outline-secondary"><a style="color: #000" href='listcustomer.jsp'>
+                                            List All</a>
                                     </button>
                                 </div>
                             </div>
@@ -526,7 +527,7 @@
                                                 <tbody>
                                                     <%
                                                         CustomerDAO cDao = new CustomerDAO(); // goi class customerdao
-                                                        ResultSet rs = cDao.getAll(); // get select all
+                                                        ResultSet rs = cDao.getDel(); // get select all
                                                         while (rs.next()) { // dua vong lap thuc hien show ra cac ket qua
                                                             out.print("<tr>");
                                                             out.print("<td>" + rs.getInt(1) + "</td>");
@@ -543,7 +544,7 @@
                                                             }
                                                             out.print("<td>" + rs.getString(10) + "</td>");
 //                                                          out.print("<a href='../../Change?pID=" + rs.getInt("pID") + "' + '><i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></a></td>");
-                                                            out.print("<td><button class='btn btn-link bg-transparent' onclick='myFunction(" + rs.getInt("cID") + ")'> <i class='fa fa-trash-o w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button></td>");
+                                                            out.print("<td><button class='btn btn-link bg-transparent' onclick='myFunction(" + rs.getInt("cID") + ")'> <i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button></td>");
                                                             out.print("</tr>");
                                                         }
                                                     %>

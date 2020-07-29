@@ -44,21 +44,39 @@
         <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
 
         <script>
+//            $(document).ready(function () {
+//
+//                $('#example').dataTable({
+//                    "aoColumnDefs": [
+//                        {'bSortable': false, 'aTargets': [3, 4, 5, 10, 14]}
+//                    ]
+//                }); // dòng này để nhúng bảng biểu thành dạng bảng được phân trang
+//
+//            });
+// Material Design example
             $(document).ready(function () {
-
-                $('#example').dataTable({
-                    "aoColumnDefs": [
-                        {'bSortable': false, 'aTargets': [3, 4, 5, 10, 14]}
-                    ]
-                }); // dòng này để nhúng bảng biểu thành dạng bảng được phân trang
-
+                $('#example').DataTable();
+                $('#dtMaterialDesignExample_wrapper').find('label').each(function () {
+                    $(this).parent().append($(this).children());
+                });
+                $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
+                    const $this = $(this);
+                    $this.attr("placeholder", "Search");
+                    $this.removeClass('form-control-sm');
+                });
+                $('#dtMaterialDesignExample_wrapper .dataTables_length').addClass('d-flex flex-row');
+                $('#dtMaterialDesignExample_wrapper .dataTables_filter').addClass('md-form');
+                $('#dtMaterialDesignExample_wrapper select').removeClass('custom-select custom-select-sm form-control form-control-sm');
+                $('#dtMaterialDesignExample_wrapper select').addClass('mdb-select');
+                $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
+                $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
             });
         </script>   
         <script>
             function myFunction(id) {
-                var person = confirm("Are you sure to Change Status ?");
+                var person = confirm("Are you sure to Delete ?");
                 if (person) {
-                    location.href = "../../Change?pID="+id;
+                    location.href = "../../Change?pID=" + id;
                 }
             }
         </script>
@@ -372,9 +390,11 @@
                 transform: rotate(15deg);
             }
             .btn{
-                background: #F5A9BC;
-                opacity: 0.7;
-                color: #000
+                /*background: #F5A9BC;*/
+                color: #000;
+                background: none;
+                border: none;
+
             }
             #icon{
                 border-radius: 40px;
@@ -384,6 +404,8 @@
             #bestsale{
                 font-weight: bold;
                 width: 150px;
+                background: #F5A9BC;
+
 
             }
             #listAll{
@@ -548,7 +570,7 @@
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Best Seller</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -666,9 +688,9 @@
                                                 <th>Change Status</th>
                                             </tr>
                                             --%>
-                                            <tr>
-                                                <th style="width: 20px">ID</th>
-                                                <th style="width: 40px">Product's name</th>
+                                            <tr >
+                                                <th style="width: 20px" class="th-sm ">ID <i class="fa fa-sort btn" style="font-size:16px"></i></th>
+                                                <th style="width: 70px">Product's name<br><i class="fa fa-sort btn" style="font-size:16px"></i></th>
                                                 <th>Image</th>
                                                 <th>Brand Products
                                                     <div class="btn-group" role="group">
@@ -710,10 +732,10 @@
                                                             %>
                                                         </div>
                                                 </th>
-                                                <th>Saleprice</th>
-                                                <th>Price</th>
+                                                <th class="th-sm">Saleprice <i class="fa fa-sort btn" style="font-size:16px"></i></th>
+                                                <th class="th-sm">Price <i class="fa fa-sort btn" style="font-size:16px"></i></th>
                                                 <th>Describle</th>
-                                                <th>Date</th>
+                                                <th class="th-sm">Date<i class="fa fa-sort btn" style="font-size:16px"></i></th>
                                                 <th>Size 
                                                     <div class="btn-group" role="group">
                                                         <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -729,8 +751,8 @@
                                                         </div>
                                                 </th>
                                                 <th>Material</th>
-                                                <th>Quantity</th>
-                                                <th>Discount</th>
+                                                <th>Quantity <i class="fa fa-sort btn" style="font-size:16px"></i></th>
+                                                <th>Discount<i class="fa fa-sort btn" style="font-size:16px"></i></th>
                                                 <th>Gender
                                                     <div class="btn-group" role="group"> 
                                                         <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -745,14 +767,7 @@
 
                                                 </th>                                                         
                                                 <th>Status Product
-                                                    <div class="btn-group" role="group">
-                                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        </button>
-                                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                            <%                                                                        out.println("<a class='dropdown-item' href='?type=status&value=0'>Invalid</a>");
-                                                                out.println("<a class='dropdown-item' href='?type=status&value=1'>Valid</a>");
-                                                            %>
-                                                        </div>
+
                                                 </th>
 
                                                 <th></th>
@@ -819,9 +834,48 @@
                                                     }
                                                     //  out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'>Update</a></td>");
 //                                                    out.print("<td><a href='../../Change?pID=" + rs.getInt("pID") + "' + '>Delete</a></td>");
-                                                    out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'><i class='fa fa-edit w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></a>");
-                                                    out.print("<button  onclick='myFunction("+rs.getInt("pID")+")'> <i class='fa fa-trash-o w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button></td>");
+                                                    out.print("<td><a  class='btn btn-link bg-transparent mb-10' href='updateProduct.jsp?id=" + rs.getInt("pID") + "'><i class='fa fa-edit w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></a>");
+                                                   // out.print("<button class='btn btn-link bg-transparent'  onclick='myFunction(" + rs.getInt("pID") + ")'> <i class='fa fa-trash-o w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button></td>");
+                                                    %>
+                                                    
+                                                     <button type="button" class="btn btn-link bg-transparent" data-toggle="modal" data-target="#centralModalWarning"><i class='fa fa-trash-o w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button>
+                                                   
+                                                     <!-- Central Modal Medium Warning -->
+                                                    <div class="modal fade" id="centralModalWarning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                                      aria-hidden="true">
+                                                      <div class="modal-dialog modal-notify modal-warning" role="document">
+                                                        <!--Content-->
+                                                        <div class="modal-content">
+                                                          <!--Header-->
+                                                          <div class="modal-header">
+                                                            <p class="heading lead">Message</p>
 
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                              <span aria-hidden="true" class="white-text">&times;</span>
+                                                            </button>
+                                                          </div>
+
+                                                          <!--Body-->
+                                                          <div class="modal-body">
+                                                            <div class="text-center">
+                                                              <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
+                                                              <p>Do you want to delete</p>
+                                                            </div>
+                                                          </div>
+
+                                                          <!--Footer-->
+                                                          <div class="modal-footer justify-content-center">
+                                                            <a href='../../Change?pID=<%=rs.getInt("pID")%>' class="btn btn-warning">Yes</a>
+                                                            <a type="button" class="btn btn-outline-warning waves-effect" data-dismiss="modal">No</a>
+                                                          </div>
+                                                        </div>
+                                                        <!--/.Content-->
+                                                      </div>
+                                                    </div>
+                                                    <!-- Central Modal Medium Warning-->
+                                                    
+                                                    
+                                                 <%   
                                                     out.print("</tr>");
                                                 }
                                             %>

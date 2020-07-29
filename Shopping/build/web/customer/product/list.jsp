@@ -81,7 +81,11 @@
             }
             .container-fluid
             {
-                padding-top: 4em;
+                padding-top: 2em;
+            }
+            
+            .btn{
+                background: #F5A9BC
             }
 
 
@@ -102,10 +106,20 @@
             .container-fluid:hover .overlay {
                 opacity: 1;
             }
+            .right {
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+            }
             .nav-item{
                 padding-right: 20px;
                 font-size: 25px;
             }
+            .arrow {
+                border: solid black;
+                border-width: 0 3px 3px 0;
+                display: inline-block;
+                padding: 3px;
+            }   
             .fotter{
                 background-color: black;
                 color: white;
@@ -116,6 +130,7 @@
                 -moz-transition: all 1s ease;
                 -o-transition: all 1s ease;
             }
+
 
             img:hover {
                 transform: scale(1.2,1.2);
@@ -280,16 +295,18 @@
                    sql="select * from image where pID=?">		
             <sql:param value="${row.pID}"/>	
         </sql:query>
-        <div class=" row container">
-            <div class="col col-sm-4 col-md-4 ml-5 " >
+        <div class=" row container" style="margin-left: 170px">
+            <div class="col col-sm-4 col-md-4 ml-3 " >
                 <button class="btn btn-light btn-lg" type="button"><a href="list.jsp" style="color: #000000">All Products</a></button>
 
 
             </div>
             <div class="col dropright col-sm-4 col-md-4 ">
-                <button class="btn btn-light btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Filter by
+
+                <button class="btn btn-light btn-lg "   type="button" id="dropdownMenuButton" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                    <div style="width: 200px">   Filter by  <i class="arrow right"></i> </div>
                 </button>
+
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li class="dropdown-submenu">
                         <a class="test" tabindex="-1" href="#">Type<span class="caret"></span></a>
@@ -365,14 +382,12 @@
                         </ul>
                     </li>
                 </ul>
+                            
             </div>
-        </div>z
-
-
-
-
+                          
+        </div>
         <div class="container-fluid mt-0">
-            <div class="row text-center padding">   
+            <div class="row text-center padding" style="margin-left: 170px" >   
                 <c:forEach var="row" items="${p.rows}">	
                     <sql:query dataSource="${conn}" var="i"	
                                sql="select * from image where pID=?">	
@@ -380,26 +395,22 @@
                         <sql:param value="${row.pID}"/>	
                     </sql:query>	
 
-                    <div class="col-xs-12 col-sm-6 col-md-3 boder bg-light ">
+                    <div class="col-xs-12 col-sm-6 col-md-3 boder  ml-5 mb-4 mt-0" style="background: rgba(245,169,188, 0.3);">
                         <div>
                             <div >
-                                <p class="text text-primary" style="font-size: 23px; font: bold">
+                                <p class="text text-primary" style="font-size: 20px; font: bold">
                                     <c:out value="${row.pName}"/> 
                                 </p>                   
                             </div>
-                            <div>
-                                Price:   <c:out value="${row.price}" />
+                                <div><h4>
+                                        Price:   <c:out value="${row.price}" /></h4>
                             </div>    
-                        </div>
+                       
                         <c:forEach var="img" items="${i.rows}" begin="0" end="0">
                             <a  href="productDetail.jsp?pID=${row.pID}" >
-                                <img src="../../${img.imageName}" height="90%" width="90%" alt="Error"/>	
-
+                                <img src="../../${img.imageName}" height="85%" width="85%" alt="Error"/>	
                             </a>
-
                         </c:forEach>
-
-
                         <div class="overlay">
                             <!--<a href="./../../CartController?id=${row.pID}&quantity=1" class="btn btn-info btn-lg">-->
                             <%
@@ -411,6 +422,7 @@
                             </a>
                         </div>
                     </div>  
+                                 </div>
 
 
 

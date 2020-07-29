@@ -179,7 +179,13 @@
                         <p style="font-size: 20px; font-weight: bold"> Thank you!</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary  btn-sm" data-dismiss="modal">Close</button>
+                        <!--<button type="button" class="btn btn-primary  btn-sm" data-dismiss="modal">Close</button>-->
+                        <button type="button" class="btn btn-primary  btn-sm" data-dismiss="modal" onclick="reload(<%=   request.getParameter("pID") %>)" >Close</button>
+                        <script>
+                            function reload(pId) {
+                                location.href = "productDetail.jsp?pID="+ pId
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
@@ -355,7 +361,7 @@
 
                         </div>
                     </div>
-                    <div class="container-fluid padding" style="position: relative; top: -125px; left: 25px">
+                    <div class="container-fluid padding" style="position: relative; top: -100px; left: 25px">
                         <div class="row text-center padding"> 
                             <div  class="col-xs-4 col-sm-4 col-md-4 boder bg-light ">
 
@@ -373,8 +379,8 @@
 
             <div class="row d-flex justify-content-center wow fadeIn">
                 <div class="col-md-6 text-center">
-                    <h4 class="my-4 h3">Describle</h4>
-                    <p><%= p.getDescrible()%> </p>
+                    <h4 class="my-4 h2">Describle</h4>
+                    <h4><%= p.getDescrible()%> </h4>
                 </div>
             </div>
 
@@ -382,7 +388,7 @@
 
            <div class="row d-flex justify-content-center wow fadeIn">
                 <div class="col-md-6 text-center">
-                    <h4 class="my-4 h4">Comment</h4>
+                    <h4 class="my-4 h2">Comment</h4>
                 </div>
                       
             <%

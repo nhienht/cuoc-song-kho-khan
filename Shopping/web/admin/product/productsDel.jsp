@@ -56,7 +56,7 @@
         </script>
         <script>
             function myFunction(id) {
-                var person = confirm("Are you sure to Change Status ?");
+                var person = confirm("Are you sure to Recycle ?");
                 if (person) {
                     location.href = "../../Change?pID=" + id;
                 }
@@ -632,10 +632,51 @@
                                                     } else {
                                                         out.println("<td style='color:red;font-weight: bold; '>Invalid</td> ");
                                                     }
-                                                    out.print("<td><a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'><i class='fa fa-edit w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></a>");
+//                                                    out.print("<td>< class='btn btn-primary-outline' a href='updateProduct.jsp?id=" + rs.getInt("pID") + "'><i class='fa fa-edit w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></a>");
 //                                                    out.print("<a href='../../Change?pID=" + rs.getInt("pID") + "' + '><i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></a></td>");
-                                                    out.print("<button class='btn btn-primary-outline'  onclick='myFunction(" + rs.getInt("pID") + ")'> <i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button></td>");
+//                                                    out.print("<td><button class='btn btn-link bg-transparent'  onclick='myFunction(" + rs.getInt("pID") + ")'> <i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button></td>");
 
+                                                    %>
+                                                    
+                                                    <td>
+                                                        <button type="button" class="btn btn-link bg-transparent" data-toggle="modal" data-target="#centralModalWarning"> <i class='fa fa-recycle w3-xxlarge' style='color: black; font-size:30px' aria-hidden='true'></i></button>
+                                                    </td>  
+                                                     <!-- Central Modal Medium Warning -->
+                                                    <div class="modal fade" id="centralModalWarning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                                      aria-hidden="true">
+                                                      <div class="modal-dialog modal-notify modal-warning" role="document">
+                                                        <!--Content-->
+                                                        <div class="modal-content">
+                                                          <!--Header-->
+                                                          <div class="modal-header">
+                                                            <p class="heading lead">Message</p>
+
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                              <span aria-hidden="true" class="white-text">&times;</span>
+                                                            </button>
+                                                          </div>
+
+                                                          <!--Body-->
+                                                          <div class="modal-body">
+                                                            <div class="text-center">
+                                                              <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
+                                                              <p>Do you want to delete</p>
+                                                            </div>
+                                                          </div>
+
+                                                          <!--Footer-->
+                                                          <div class="modal-footer justify-content-center">
+                                                            <a href='../../Change?pID=<%=rs.getInt("pID")%>' class="btn btn-warning">Yes</a>
+                                                            <a type="button" class="btn btn-outline-warning waves-effect" data-dismiss="modal">No</a>
+                                                          </div>
+                                                        </div>
+                                                        <!--/.Content-->
+                                                      </div>
+                                                    </div>
+                                                    <!-- Central Modal Medium Warning-->
+                                                    
+                                                    
+                                                    <%
                                                     out.print("</tr>");
                                                 }
                                             %>
