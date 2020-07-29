@@ -83,7 +83,7 @@
             {
                 padding-top: 2em;
             }
-            
+
             .btn{
                 background: #F5A9BC
             }
@@ -138,6 +138,14 @@
                 -moz-transform: scale(1.2,1.2);
                 -o-transform: scale(1.2,1,2);
                 -ms-transform: scale(1.2,1.2);
+            }
+            .active-pink-4 input[type=text]:focus:not([readonly]) {
+                border: 1px solid #f48fb1;
+                box-shadow: 0 0 0 1px #f48fb1;
+            }
+            .active-pink-3 input[type=text] {
+                border: 1px solid #f48fb1;
+                box-shadow: 0 0 0 1px #f48fb1;
             }
 
         </style> 
@@ -284,6 +292,13 @@
 
             <sql:param value="${param.value}"/>
         </sql:query>	
+        <%} else  if(request.getParameter("txtSearch")!=null){%>
+        
+         <sql:query var="p" dataSource="${conn}">
+             SELECT * FROM  products WHERE status =1 and pName like '%${param.txtSearch}%' ORDER BY pID ASC
+
+        </sql:query>
+        
         <%} else {%>
         <sql:query var="p" dataSource="${conn}">
             select * from products where status = 1
@@ -296,95 +311,101 @@
             <sql:param value="${row.pID}"/>	
         </sql:query>
         <div class=" row container" style="margin-left: 170px">
-            <div class="col col-sm-4 col-md-4 ml-3 " >
-                <button class="btn btn-light btn-lg" type="button"><a href="list.jsp" style="color: #000000">All Products</a></button>
+            <div>
+                <div class="col col-sm-4 col-md-4 ml-3 " >
+                    <button class="btn btn-light btn-lg" type="button"><a href="list.jsp" style="color: #000000">All Products</a></button>
 
 
-            </div>
-            <div class="col dropright col-sm-4 col-md-4 ">
+                </div>
+                <div class="col dropright col-sm-4 col-md-4 ">
 
-                <button class="btn btn-light btn-lg "   type="button" id="dropdownMenuButton" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                    <div style="width: 200px">   Filter by  <i class="arrow right"></i> </div>
-                </button>
+                    <button class="btn btn-light btn-lg "   type="button" id="dropdownMenuButton" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                        <div style="width: 200px">   Filter by  <i class="arrow right"></i> </div>
+                    </button>
 
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li class="dropdown-submenu">
-                        <a class="test" tabindex="-1" href="#">Type<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <%
-                                TypeDAO tDao = new TypeDAO();
-                                ResultSet allType = tDao.getAll();
-                                while (allType.next()) {
-                                    out.println("  <li><a tabindex='-1' href='list.jsp?type=type&value=" + allType.getString(1) + "'> " + allType.getString(2) + "</a></li>");
-                                }
-                            %>
-                            <li class="dropdown-submenu">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">Type<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <%
+                                    TypeDAO tDao = new TypeDAO();
+                                    ResultSet allType = tDao.getAll();
+                                    while (allType.next()) {
+                                        out.println("  <li><a tabindex='-1' href='list.jsp?type=type&value=" + allType.getString(1) + "'> " + allType.getString(2) + "</a></li>");
+                                    }
+                                %>
+                                <li class="dropdown-submenu">
 
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a class="test" tabindex="-1" href="#">Brand<span class="caret"></span></a>
-                        <ul class="dropdown-menu dropright ">
-                            <%
-                                BrandDao brDao = new BrandDao();
-                                ResultSet allBrand = brDao.getAll();
-                                while (allBrand.next()) {
-                                    out.println("  <li><a tabindex='-1' href='list.jsp?type=brand&value=" + allBrand.getString(1) + "'> " + allBrand.getString(2) + "</a></li>");
-                                }
-                            %>
-                            <li class="dropdown-submenu">
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">Brand<span class="caret"></span></a>
+                            <ul class="dropdown-menu dropright ">
+                                <%
+                                    BrandDao brDao = new BrandDao();
+                                    ResultSet allBrand = brDao.getAll();
+                                    while (allBrand.next()) {
+                                        out.println("  <li><a tabindex='-1' href='list.jsp?type=brand&value=" + allBrand.getString(1) + "'> " + allBrand.getString(2) + "</a></li>");
+                                    }
+                                %>
+                                <li class="dropdown-submenu">
 
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a class="test" tabindex="-1" href="#">Supplier<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <%
-                                SupplierDAO supDao = new SupplierDAO();
-                                ResultSet allSup = supDao.getAll();
-                                while (allSup.next()) {
-                                    out.println("  <li><a tabindex='-1' href='list.jsp?type=supppier&value=" + allSup.getString(1) + "'> " + allSup.getString(2) + "</a></li>");
-                                }
-                            %>
-                            <li class="dropdown-submenu">
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">Supplier<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <%
+                                    SupplierDAO supDao = new SupplierDAO();
+                                    ResultSet allSup = supDao.getAll();
+                                    while (allSup.next()) {
+                                        out.println("  <li><a tabindex='-1' href='list.jsp?type=supppier&value=" + allSup.getString(1) + "'> " + allSup.getString(2) + "</a></li>");
+                                    }
+                                %>
+                                <li class="dropdown-submenu">
 
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a class="test" tabindex="-1" href="#">Size<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <%
-                                out.println("<li><a tabindex='-1' href='?type=size&value=0'>S</a></li>");
-                                out.println("<li><a tabindex='-1' href='?type=size&value=1'>M</a></li>");
-                                out.println("<li><a tabindex='-1' href='?type=size&value=2'>L</a></li>");
-                                out.println("<li><a tabindex='-1' href='?type=size&value=3'>XL</a></li>");
-                                out.println("<li><a tabindex='-1' href='?type=size&value=4'>XXL</a></li>");
-                            %>
-                            <li class="dropdown-submenu">
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">Size<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <%
+                                    out.println("<li><a tabindex='-1' href='?type=size&value=0'>S</a></li>");
+                                    out.println("<li><a tabindex='-1' href='?type=size&value=1'>M</a></li>");
+                                    out.println("<li><a tabindex='-1' href='?type=size&value=2'>L</a></li>");
+                                    out.println("<li><a tabindex='-1' href='?type=size&value=3'>XL</a></li>");
+                                    out.println("<li><a tabindex='-1' href='?type=size&value=4'>XXL</a></li>");
+                                %>
+                                <li class="dropdown-submenu">
 
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-submenu">
-                        <a class="test" tabindex="-1" href="#">Gender<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <%
-                                out.println("<li><a tabindex='-1' href='?type=gender&value=Male'>Male</a></li>");
-                                out.println("<li><a tabindex='-1' href='?type=gender&value=Female'>Female</a></li>");
-                                out.println("<li><a tabindex='-1' href='?type=gender&value=Unisex'>Unisex</a></li>");
-                            %>
-                            <li class="dropdown-submenu">
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">Gender<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <%
+                                    out.println("<li><a tabindex='-1' href='?type=gender&value=Male'>Male</a></li>");
+                                    out.println("<li><a tabindex='-1' href='?type=gender&value=Female'>Female</a></li>");
+                                    out.println("<li><a tabindex='-1' href='?type=gender&value=Unisex'>Unisex</a></li>");
+                                %>
+                                <li class="dropdown-submenu">
 
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                            
-            </div>
-                          
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="col col-md-3 col-sm-3" >
+                    <form class="active-pink-3 active-pink-4 h-120 " style="margin-left: 100px;width: 300px; "> 
+                        <input name="txtSearch"  class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    </form>
+                </div>
+            </div>   
         </div>
         <div class="container-fluid mt-0">
             <div class="row text-center padding" style="margin-left: 170px" >   
@@ -402,27 +423,27 @@
                                     <c:out value="${row.pName}"/> 
                                 </p>                   
                             </div>
-                                <div><h4>
-                                        Price:   <c:out value="${row.price}" /></h4>
+                            <div><h4>
+                                    Price:   <c:out value="${row.price}" /></h4>
                             </div>    
-                       
-                        <c:forEach var="img" items="${i.rows}" begin="0" end="0">
-                            <a  href="productDetail.jsp?pID=${row.pID}" >
-                                <img src="../../${img.imageName}" height="85%" width="85%" alt="Error"/>	
-                            </a>
-                        </c:forEach>
-                        <div class="overlay">
-                            <!--<a href="./../../CartController?id=${row.pID}&quantity=1" class="btn btn-info btn-lg">-->
-                            <%
-                                String url = request.getRequestURI();
-                                // System.out.println(url);
+
+                            <c:forEach var="img" items="${i.rows}" begin="0" end="0">
+                                <a  href="productDetail.jsp?pID=${row.pID}" >
+                                    <img src="../../${img.imageName}" height="85%" width="85%" alt="Error"/>	
+                                </a>
+                            </c:forEach>
+                            <div class="overlay">
+                                <!--<a href="./../../CartController?id=${row.pID}&quantity=1" class="btn btn-info btn-lg">-->
+                                <%
+                                    String url = request.getRequestURI();
+                                    // System.out.println(url);
 %>
-                            <a href="./../../CartController?id=${row.pID}&quantity=1&url=<%= url%>" class="btn btn-info btn-lg">
-                                <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
-                            </a>
-                        </div>
-                    </div>  
-                                 </div>
+                                <a href="./../../CartController?id=${row.pID}&quantity=1&url=<%= url%>" class="btn btn-info btn-lg">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+                                </a>
+                            </div>
+                        </div>  
+                    </div>
 
 
 
