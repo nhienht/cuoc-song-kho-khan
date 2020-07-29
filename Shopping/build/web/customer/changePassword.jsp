@@ -173,11 +173,7 @@
                                     alert("Please enter Password");
 
                                 // If confirm password not entered 
-                                else if (password2.length < 6)
-                                {
-                                    alert("Password must be length > 6");
-                                    return false;
-                                } else if (password2 == '')
+                                else if (password2 == '')
                                 {
                                     alert("Please enter confirm password");
                                     return  false;

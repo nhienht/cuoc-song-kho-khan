@@ -103,7 +103,7 @@
         <%@include file="../header/header.jsp" %>
         <nav class=" navbar navbar-expand-md navbar-light bg-light sticky-top">
 
-            <a class="navbar-branch" href="index.jsp">
+            <a class="navbar-branch" href="../index.jsp">
                 <img src="../images/logo.jpg" height="80px" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
