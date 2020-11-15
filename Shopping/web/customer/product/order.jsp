@@ -162,27 +162,27 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Your Name</label>
-                                        <input type="text" class="form-control" placeholder="Your Name" name="nameCustomer">
+                                        <input type="text" class="form-control" required="" placeholder="Your Name" name="nameCustomer">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
-                                        <input type="text" class="form-control" placeholder="Your Phone Number" name="phone">
+                                        <input type="text" class="form-control" required="" placeholder="Your Phone Number" name="phone">
                                     </div>
                                 </div>
                                 <div class="w-100"></div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="streetaddress">Street Address</label>
-                                        <input type="text" class="form-control" placeholder="House Number and Street Name" name="address">
+                                        <input type="text" class="form-control" required="" placeholder="House Number and Street Name" name="address">
                                     </div>
                                 </div>
                                 <div class="w-100"></div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="towncity">Note</label>
-                                        <input type="text" class="form-control" placeholder="Your Note" name="note">
+                                        <input type="text" class="form-control" required="" placeholder="Your Note" name="note">
                                     </div>
                                 </div>
                             </div>

@@ -551,7 +551,7 @@
                                                     <div>Total</div>
                                                     <div class="input-group" >
 
-                                                        <input type="input" class="form-control" name="total" value="<%= total%>">
+                                                        <input type="input" class="form-control" name="total" readonly="" value="<%= total%>">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-xs-12">
